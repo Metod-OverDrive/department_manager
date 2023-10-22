@@ -34,6 +34,9 @@ public class Employee {
     @Column(name = "salary")
     private Float salary;
 
+    @Column(name = "is_active")
+    private Boolean isActive;
+
     @ManyToOne()
     @JoinColumn(name = "department")
     private Department department;
