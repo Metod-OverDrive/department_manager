@@ -27,5 +27,5 @@ public interface DepartmentRepository extends JpaRepository<Department, Long> {
             WHERE department_id = :departmentId
             AND employee_id = :employeeId)
         """, nativeQuery = true)
-    boolean isEmployeeOwner(@Param("departmentId") Long departmentId, @Param("EmployeeId") Long employeeId);
+    boolean isEmployeeOwner(@Param("departmentId") Long departmentId, @Param("employeeId") Long employeeId);
 }

@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/employees")
+@RequestMapping("/api/v1/departments")
 @RequiredArgsConstructor
 @Validated
 public class DepartmentControllerV1 {
@@ -53,13 +53,13 @@ public class DepartmentControllerV1 {
     }
 
     @GetMapping("/{id}/tasks")
-    public List<TaskDto> getTasksByUserId(@PathVariable Long id) {
+    public List<TaskDto> getTasksByDepartmentId(@PathVariable Long id) {
         List<Task> tasks = taskService.getAllByDepartmentId(id);
         return taskMapper.toDto(tasks);
     }
 
     @GetMapping("/{id}/employees")
-    public List<EmployeeDto> getEmployeesByUserId(@PathVariable Long id) {
+    public List<EmployeeDto> getEmployeesByDepartmentId(@PathVariable Long id) {
         List<Employee> employees = employeeService.getAllByDepartmentId(id);
         return employeeMapper.toDto(employees);
     }

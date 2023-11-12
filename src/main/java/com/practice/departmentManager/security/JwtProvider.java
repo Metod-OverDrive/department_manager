@@ -1,9 +1,9 @@
 package com.practice.departmentManager.security;
 
+import com.practice.departmentManager.config.properties.JwtProperties;
 import com.practice.departmentManager.domain.employee.Employee;
 import com.practice.departmentManager.domain.employee.Role;
 import com.practice.departmentManager.service.EmployeeService;
-import com.practice.departmentManager.service.JwtUserDetailsService;
 import com.practice.departmentManager.web.dto.auth.JwtResponse;
 import com.practice.departmentManager.web.exception.AccessDeniedException;
 import io.jsonwebtoken.Claims;

@@ -1,4 +1,4 @@
-package com.practice.departmentManager.security;
+package com.practice.departmentManager.config.properties;
 
 import lombok.Getter;
 import lombok.Setter;

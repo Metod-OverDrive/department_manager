@@ -5,9 +5,6 @@ import com.practice.departmentManager.web.dto.department.DepartmentDto;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface DepartmentMapper {
+public interface DepartmentMapper extends Mappable<Department, DepartmentDto> {
 
-    DepartmentDto toDto(Department department);
-
-    Department toEntity(DepartmentDto departmentDto);
 }

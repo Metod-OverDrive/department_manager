@@ -9,8 +9,15 @@ spring:
     change-log: classpath:liquibase/db.changelog.yaml
     enabled: true
     default-schema: ${POSTGRES_SCHEMA}
-  security:
-    jwt:
-      secret: ${JWT_SECRET}
-      access: 1
-      refresh: 30
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+    producer:
+      keySerializer: ${KAFKA_BOOTSTRAP_SERVERS}
+      valueSerializer: ${KAFKA_BOOTSTRAP_SERVERS}
+server:
+  port: 8081
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+    access: 1
+    refresh: 30

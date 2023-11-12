@@ -1,7 +1,7 @@
-package com.practice.departmentManager.service;
+package com.practice.departmentManager.security;
 
 import com.practice.departmentManager.domain.employee.Employee;
-import com.practice.departmentManager.security.JwtEntityFactory;
+import com.practice.departmentManager.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
