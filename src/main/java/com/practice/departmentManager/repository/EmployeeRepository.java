@@ -26,4 +26,14 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
         where de.department_id = :departmentId
         """, nativeQuery = true)
     List<Employee> findAllByDepartmentId(@Param("departmentId") Long departmentId);
+
+
+    @Query(value = """
+        Select * FROM employees e
+        JOIN departments_employees de on e.id = de.employee_id
+        JOIN departments_tasks dt on de.department_id = dt.task_id
+        WHERE dt.task_id = :taskId
+        """, nativeQuery = true)
+    List<Employee> findAllEmployeeByTaskId(@Param("taskId") Long taskId);
+
 }

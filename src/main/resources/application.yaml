@@ -12,8 +12,8 @@ spring:
   kafka:
     bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
     producer:
-      keySerializer: ${KAFKA_BOOTSTRAP_SERVERS}
-      valueSerializer: ${KAFKA_BOOTSTRAP_SERVERS}
+      keySerializer: ${KAFKA_KEY_SERIALIZER}
+      valueSerializer: ${KAFKA_VALUE_SERIALIZER}
 server:
   port: 8081
 security:

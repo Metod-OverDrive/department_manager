@@ -1,6 +1,5 @@
 package com.practice.departmentManager.domain.employee;
 
-import com.practice.departmentManager.domain.department.Department;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -37,13 +36,9 @@ public class Employee {
     @Column(name = "is_active")
     private Boolean isActive;
 
-    @ManyToOne()
-    @JoinColumn(name = "department")
-    private Department department;
-
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "users_roles",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+    @JoinTable(name = "employees_roles",
+            joinColumns = {@JoinColumn(name = "employee_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 

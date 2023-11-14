@@ -43,7 +43,8 @@ public class ApplicationConfig {
                 .authorizeHttpRequests(configure ->
                         configure.requestMatchers("/api/v1/auth/**")
                                 .permitAll()
-                                .anyRequest().authenticated())
+//                                .anyRequest().authenticated())
+                                .anyRequest().permitAll())
                 .anonymous(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new JwtFilter(jwtProvider),
                         UsernamePasswordAuthenticationFilter.class);

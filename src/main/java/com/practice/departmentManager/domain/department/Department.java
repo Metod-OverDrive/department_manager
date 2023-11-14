@@ -19,10 +19,16 @@ public class Department {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "department")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "departments_employees",
+            joinColumns = {@JoinColumn(name = "department_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "employee_id", referencedColumnName = "id")})
     private List<Employee> employees;
 
-    @OneToMany(mappedBy = "department")
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "departments_tasks",
+            joinColumns = {@JoinColumn(name = "department_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "task_id", referencedColumnName = "id")})
     private List<Task> tasks;
 
 }

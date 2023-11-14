@@ -37,6 +37,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<Employee> getAllEmployeeByTaskId(Long taskId) {
+        return employeeRepository.findAllEmployeeByTaskId(taskId);
+    }
+
+    @Override
     @Transactional
     public Employee update(Employee employee) {
         return employeeRepository.save(employee);

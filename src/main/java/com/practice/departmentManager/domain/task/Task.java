@@ -29,8 +29,4 @@ public class Task {
     @Column(name = "expiration_data")
     private Date expirationDate;
 
-    @ManyToOne
-    @JoinColumn(name = "department")
-    private Department department;
-
 }
