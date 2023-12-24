@@ -16,7 +16,6 @@ import java.util.Date;
 @Setter
 public class TaskDto {
 
-    @NotNull(message = "Id must be not null.", groups = OnUpdate.class)
     private Long id;
 
     @NotNull(message = "Title must be not null.",

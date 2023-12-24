@@ -3,6 +3,7 @@ package com.practice.departmentManager.web.controller;
 import com.practice.departmentManager.domain.employee.Employee;
 import com.practice.departmentManager.service.EmployeeService;
 import com.practice.departmentManager.web.dto.employee.EmployeeDto;
+import com.practice.departmentManager.web.dto.validation.OnCreate;
 import com.practice.departmentManager.web.dto.validation.OnUpdate;
 import com.practice.departmentManager.web.mapper.EmployeeMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class EmployeeControllerV1 {
     private final EmployeeMapper employeeMapper;
 
     @PutMapping
-    public EmployeeDto update(@Validated(OnUpdate.class)
+    public EmployeeDto update(@Validated({OnUpdate.class})
                           @RequestBody EmployeeDto dto) {
         Employee employee = employeeMapper.toEntity(dto);
         Employee updatedEmployee = employeeService.update(employee);

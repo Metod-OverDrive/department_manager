@@ -12,7 +12,6 @@ import org.hibernate.validator.constraints.Length;
 @Setter
 public class EmployeeDto {
 
-    @NotNull(message = "Id must be not null", groups = OnUpdate.class)
     private Long id;
 
     @NotNull(message = "Name must be not null", groups = {OnUpdate.class, OnCreate.class})

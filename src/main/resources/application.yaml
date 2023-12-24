@@ -1,10 +1,16 @@
 spring:
   config:
     import: optional:file:.env[.properties]
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://${HOST}:5432/${POSTGRES_DATABASE}
+    url: jdbc:postgresql://db:5432/department_manager
+#    url: jdbc:postgresql://localhost:5439/department_manager
     username: ${POSTGRES_USERNAME}
     password: ${POSTGRES_PASSWORD}
+    driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: classpath:liquibase/db.changelog.yaml
     enabled: true
@@ -14,8 +20,6 @@ spring:
     producer:
       keySerializer: ${KAFKA_KEY_SERIALIZER}
       valueSerializer: ${KAFKA_VALUE_SERIALIZER}
-server:
-  port: 8081
 security:
   jwt:
     secret: ${JWT_SECRET}

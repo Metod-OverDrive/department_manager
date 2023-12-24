@@ -3,12 +3,13 @@ package com.practice.departmentManager.domain.employee;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name = "employees")
 @Data
-public class Employee {
+public class Employee implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

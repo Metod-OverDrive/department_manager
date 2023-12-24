@@ -7,6 +7,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -18,16 +20,22 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
+@RequiredArgsConstructor(onConstructor = @__(@Lazy))
 public class ApplicationConfig {
 
     private final JwtProvider jwtProvider;
     private final ApplicationContext applicationContext;
 
     @Bean
-    @Lazy
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration configuration
+    ) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 
     @Bean
@@ -43,8 +51,10 @@ public class ApplicationConfig {
                 .authorizeHttpRequests(configure ->
                         configure.requestMatchers("/api/v1/auth/**")
                                 .permitAll()
-//                                .anyRequest().authenticated())
-                                .anyRequest().permitAll())
+                                .requestMatchers("/api/v1/tasks/kafka")
+                                .permitAll()
+                                .anyRequest().authenticated())
+//                                .anyRequest().permitAll())
                 .anonymous(AbstractHttpConfigurer::disable)
                 .addFilterBefore(new JwtFilter(jwtProvider),
                         UsernamePasswordAuthenticationFilter.class);

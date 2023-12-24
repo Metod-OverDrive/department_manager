@@ -8,6 +8,7 @@ import com.practice.departmentManager.service.KafkaDataService;
 import com.practice.departmentManager.service.ReminderService;
 import com.practice.departmentManager.service.TaskService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.time.Duration;
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class ReminderServiceImpl implements ReminderService {
 

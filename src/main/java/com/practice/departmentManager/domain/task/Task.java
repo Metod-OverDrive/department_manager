@@ -1,15 +1,15 @@
 package com.practice.departmentManager.domain.task;
 
-import com.practice.departmentManager.domain.department.Department;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "tasks")
 @Data
-public class Task {
+public class Task implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
