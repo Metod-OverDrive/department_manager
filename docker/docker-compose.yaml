@@ -1,0 +1,75 @@
+version: '3'
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  db-data:
+    driver: local
+  kafka-data:
+    driver: local
+  zookeeper-data:
+    driver: local
+
+services:
+  app:
+    build:
+      context: ..
+    networks:
+      - app
+    depends_on:
+      - db
+      - kafka
+    ports:
+      - '8080:8080'
+    env_file: ./.env
+
+  db:
+    image: postgres
+    container_name: postgres
+    networks:
+      - app
+    env_file: ./.env
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USERNAME}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DATABASE}
+#      - PGDATA=/var/lib/postgresql/data
+    ports:
+      - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
+    volumes:
+      - ../src/main/resources/preliquibase:/docker-entrypoint-initdb.d
+ #     - db-data:/var/lib/postgresql/data
+
+  zookeeper:
+    image: 'confluentinc/cp-zookeeper:latest'
+    networks:
+      - app
+    environment:
+      - ZOOKEEPER_CLIENT_PORT=${ZOOKEEPER_CLIENT_PORT}
+      - ZOOKEEPER_TICK_TIME=${ZOOKEEPER_TICK_TIME}
+    ports:
+      - '2181:2181'
+    volumes:
+      - zookeeper-data:/var/lib/zookeeper/data
+
+  kafka:
+    image: 'confluentinc/cp-kafka:latest'
+    networks:
+      - app
+    depends_on:
+      - zookeeper
+    environment:
+      - KAFKA_BROKER_ID=${KAFKA_BROKER_ID}
+      - KAFKA_ZOOKEEPER_CONNECT=${KAFKA_ZOOKEEPER_CONNECT}
+      - KAFKA_ADVERTISED_LISTENERS=${KAFKA_ADVERTISED_LISTENERS}
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP}
+      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=${KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR}
+    ports:
+      - '9092:9092'
+    volumes:
+      - ~/kafka/data/zookeeper_data:/var/lib/zookeeper/data
+      - ~/kafka/data/zookeeper_log:/var/lib/zookeeper/log
+      - kafka-data:/var/lib/kafka/data
