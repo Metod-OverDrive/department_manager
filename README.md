@@ -16,7 +16,9 @@
 сотрудникам определённого департамента с помощью Schedule (Отсчёт введётся в cron).
 2. Сотрудники из предыдущего пункта отправляются в топик "task-remind"
 Apache Kafka.
-3. Приложение можно запустить через Docker compose,
+3. Настроен Spring Security одной из последних версий, работающий с Access и Refresh Token.
+Присутствует логика login, register и Refresh Access токен с помощью Refresh токена.
+4. Приложение можно запустить через Docker compose,
 который самостоятельно настроет Postgres, Apache Kafka и Zookeeper (Нужен для работы Kafka).
 
 Чтобы зарустить через Docker compose необходимо
