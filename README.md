@@ -5,7 +5,7 @@
 ### Основной целью проекта было освоение следующих технологий:
 * Spring Framework(boot, web, data, security).
 * PostgreSQL и Liquebase.
-* Apache Kafka (Реактивная)
+* Apache Kafka
 * Docker / Docker compose
 
 ### В проекте из интересного присутствуют такие детали:
@@ -19,7 +19,7 @@ Apache Kafka.
 4. Приложение можно запустить через Docker compose,
 который самостоятельно настроет Postgres, Apache Kafka и Zookeeper (Нужен для работы Kafka).
 
-Чтобы зарустить через Docker compose необходимо
+Чтобы запустить приложение через Docker compose необходимо
 в папке docker создать файл .env и переместить тута всё,
 что находится в файле example.txt.
 
